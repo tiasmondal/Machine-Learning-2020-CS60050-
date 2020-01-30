@@ -1,0 +1,6 @@
+Training error
+0.09969350888294176
+Total number of iterations
+1341
+Test error
+0.09546810346589259
