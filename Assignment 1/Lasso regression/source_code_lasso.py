@@ -5,7 +5,7 @@ filename = "train.csv"
 data=pd.read_csv(filename,sep=r'\s*,\s*',header=0, encoding='ascii', engine='python')
 feature=np.ones((1000,1))               #Features
 order=4                             #Order of the polynomial that can be changed
-lambda1=1                                        #lambda value of the regression that can be changed
+lambda1=1                                       #lambda value of the regression that can be changed
 
 labels=np.array(data["Label"])        #Labels
 labels=labels.reshape((1000,1))
@@ -21,9 +21,9 @@ error_diff=10000000
 error=10000
 count=0
 while (error_diff>=0.0000001):                                 #error difference threshold set to 10^-7
-  error1=np.sum((feature.dot(weights)-labels)**2)/(2*1000)+(lambda1/2000)*np.sum(weights**2)    #Previous error
-  weights=weights-l_r*(np.transpose(feature)).dot(feature.dot(weights)-labels)/1000-(2*l_r*lambda1/1000)*weights  #weights update
-  error=np.sum((feature.dot(weights)-labels)**2)/(2*1000)+(lambda1/2000)*np.sum(weights**2)   #Current errpr
+  error1=np.sum((feature.dot(weights)-labels)**2)/(2*1000)+(lambda1/2000)*np.sum(weights)    #Previous error
+  weights=weights-l_r*(np.transpose(feature)).dot(feature.dot(weights)-labels)/1000-(2*l_r*lambda1/1000)*np.ones((order+1,1)) #weights update
+  error=np.sum((feature.dot(weights)-labels)**2)/(2*1000)+(lambda1/2000)*np.sum(weights)   #Current errpr
   arrerror=np.append(arrerror,error)              #Estimating learning curve
   countarr=np.append(countarr,count)
   if(error>error1):
@@ -56,7 +56,7 @@ fig=plt.figure()
 plt.scatter(X,Y,label="Actual test data")
 
 Z=feature.dot(weights)
-err=np.sum((Z-Y)**2)/400+(lambda1/400)*np.sum(weights**2)
+err=np.sum((Z-Y)**2)/400+(lambda1/400)*np.sum(weights)
 print("Test error")
 print(err)
 Z=Z.reshape((200,))
