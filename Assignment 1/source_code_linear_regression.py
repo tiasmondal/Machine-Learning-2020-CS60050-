@@ -4,7 +4,7 @@ import pandas as pd
 filename = "train.csv"
 data=pd.read_csv(filename,sep=r'\s*,\s*',header=0, encoding='ascii', engine='python')
 feature=np.ones((1000,1))               #Features
-order=9                                 #Order of the polynomial that can be changed
+order=1                                 #Order of the polynomial that can be changed
 labels=np.array(data["Label"])        #Labels
 labels=labels.reshape((1000,1))
 l_r=0.05
