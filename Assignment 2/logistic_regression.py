@@ -202,7 +202,7 @@ while error_diff>=10e-7:
 	error1=-(np.transpose(labels).dot(np.log(h1))+(1-np.transpose(labels)).dot(np.log(1-h1)))/len(data);
 	
 	error_diff=error-error1;
-	print(error1);
+	#print(error1);
 	if(error1>error):
 		print("Diverging");
 		break;
