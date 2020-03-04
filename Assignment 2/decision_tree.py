@@ -4,9 +4,13 @@ import pandas as pd
 eps = np.finfo(float).eps
 from numpy import log2 as log
 import pprint
+from sklearn import metrics
+
 
 filename = "data_modified_Decision_tree.csv"
 data=pd.read_csv(filename,sep=r'\s*,\s*',header=0, encoding='ascii', engine='python')
+#data1=pd.read_csv(filename,sep=r'\s*,\s*',header=0, encoding='ascii', engine='python',skiprows=[i for i in range(1,533*2+1)],nrows=533)
+################################### Testing purpose #######################################
 # outlook = 'overcast,overcast,overcast,overcast,rainy,rainy,rainy,rainy,rainy,sunny,sunny,sunny,sunny,sunny'.split(',')
 # temp = 'hot,cool,mild,hot,mild,cool,cool,mild,mild,hot,hot,mild,cool,mild'.split(',')
 # humidity = 'high,normal,high,normal,high,normal,normal,normal,high,high,high,high,normal,normal'.split(',')
@@ -15,7 +19,10 @@ data=pd.read_csv(filename,sep=r'\s*,\s*',header=0, encoding='ascii', engine='pyt
 # dataset ={'outlook':outlook,'temp':temp,'humidity':humidity,'windy':windy,'quality':play}
 # df = pd.DataFrame(dataset,columns=['outlook','temp','humidity','windy','quality'])
 # data=df;
+
+###########################################################################################
 print(data);
+
 print(data["quality"].value_counts())
 def find_entropy(data):
 	entropy_node = 0  #Initialize Entropy
@@ -46,6 +53,13 @@ def ent(data,attribute):
 headers=["fixed acidity","volatile acidity","citric acid","residual sugar","chlorides","free sulfur dioxide","total sulfur dioxide","density","pH","sulphates","alcohol"];
 #headers=['outlook','temp','humidity','windy']
 print("Entropy at root level")
+# data1={}
+# for i in range(0,len(headers)):
+# 	data1[headers[i]]=data[headers[i]][0:200]
+# data1['quality']=data['quality'][0:200]
+# data=data1
+# print(data)
+
 for i in range(0,len(headers)):
 	print(headers[i]+" "+str(ent(data,headers[i])));
 
@@ -64,8 +78,6 @@ x=np.zeros(11);
 print("Priority nodes")
 def buildTree(data,x,tree=None): 
 	Class = data.keys()[-1]   #To make the code generic, changing target variable class name
-	
-	
 	#Here we build our decision tree
 	# x[0]=x[0]+1
 	# if(x[0]>=25):                #Max iteration limit
@@ -102,7 +114,7 @@ def buildTree(data,x,tree=None):
 		else:
 			if(len(subtable["quality"])<=10):
 				tree[node][value] = clValue[np.argmax(counts)]
-				return tree;
+				#return tree;
 			tree[node][value] = buildTree(subtable,x) #Calling the function recursively
 
 				   
@@ -114,23 +126,58 @@ print(tree)
 pprint.pprint(tree);
 
 ##################### Testing Decision Tree #######################
-# for j in range(0,8):
-# 	i=0;
-# 	while(i<len(headers)):
-# 		try:
+j=0;
+tree1=tree;
+predictions=[]
+# for i in range(0,len(data["quality"])):
+# 	if(data['quality'][i]==1):
+# 		data['quality'][i]="yes";
+# 	elif(data['quality'][i]==2):
+# 		data['quality'][i]="no";
+# 	elif(data['quality'][i]==0):
+# 		data['quality'][i]="yaa";
+prevj=-1;
+j=0
+while (j<len(data["quality"])):
+	i=0;
+	tree1=tree;
+	flag=0;
+	while(i<len(headers)):
+		
+		try:
 			
-# 			#print("i ="+str(i));
+			#print("i ="+str(i));
 			
-# 			tree=tree[headers[i]][data[headers[i]][j]];
-# 			print(tree);
-# 			if(tree=='yes' or tree == 'no'):
-# 				print(tree);
+			tree1=tree1[headers[i]][data[headers[i]][j]];
+			#print(tree1);
+			if(tree1==1 or tree1 == 2 or tree1 == 0):
+				predictions.append(tree1);
+				flag=1;
+				break;
 				
-# 			else:
-# 				i=-1;
-# 			i=i+1;
+			else:
+				i=-1;
+			i=i+1;
 
-# 		except:
-# 			i=i+1;
+		except:
+			i=i+1;
+	if(flag!=1):
+		print(j)
+		print("no conclusion")
+		print(tree1)
+	j=j+1;
 
 
+# for i in range(0,len(predictions)):
+# 	if(predictions[i]=="yes"):
+# 		predictions[i]=1;
+# 	elif(predictions[i]=="no"):
+# 		predictions[i]=2;
+# 	elif(predictions[i]=="yaa"):
+# 		predictions[i]=0;
+#print(len(data["quality"]))
+#print(len(predictions))
+print(len(predictions))
+cm = metrics.confusion_matrix(data['quality'], predictions)
+print("Confusion matrix")
+print(cm)
