@@ -10,17 +10,7 @@ from sklearn import metrics
 filename = "data_modified_Decision_tree.csv"
 data=pd.read_csv(filename,sep=r'\s*,\s*',header=0, encoding='ascii', engine='python')
 #data1=pd.read_csv(filename,sep=r'\s*,\s*',header=0, encoding='ascii', engine='python',skiprows=[i for i in range(1,533*2+1)],nrows=533)
-################################### Testing purpose #######################################
-# outlook = 'overcast,overcast,overcast,overcast,rainy,rainy,rainy,rainy,rainy,sunny,sunny,sunny,sunny,sunny'.split(',')
-# temp = 'hot,cool,mild,hot,mild,cool,cool,mild,mild,hot,hot,mild,cool,mild'.split(',')
-# humidity = 'high,normal,high,normal,high,normal,normal,normal,high,high,high,high,normal,normal'.split(',')
-# windy = 'FALSE,TRUE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,TRUE'.split(',')
-# play = 'yes,yes,yes,yes,yes,yes,no,yes,no,no,no,no,yes,yes'.split(',')
-# dataset ={'outlook':outlook,'temp':temp,'humidity':humidity,'windy':windy,'quality':play}
-# df = pd.DataFrame(dataset,columns=['outlook','temp','humidity','windy','quality'])
-# data=df;
 
-###########################################################################################
 print(data);
 
 print(data["quality"].value_counts())
@@ -51,7 +41,7 @@ def ent(data,attribute):
 
 	return(abs(entropy_attribute))
 headers=["fixed acidity","volatile acidity","citric acid","residual sugar","chlorides","free sulfur dioxide","total sulfur dioxide","density","pH","sulphates","alcohol"];
-#headers=['outlook','temp','humidity','windy']
+
 print("Entropy at root level")
 # data1={}
 # for i in range(0,len(headers)):
@@ -87,7 +77,7 @@ def buildTree(data,x,tree=None):
 	node=data.keys()[:-1][np.argmax(IG)]
 	IGvalue=IG[np.argmax(IG)]
 	print(node)
-	#Get distinct value of that attribute e.g Salary is node and Low,Med and High are values
+	
 	attValue = np.unique(data[node])
 	
 	#Create an empty dictionary to create tree    
