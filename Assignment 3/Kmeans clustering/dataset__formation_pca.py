@@ -28,6 +28,9 @@ print(headers)
 print(len(headers))
 data1=np.array(data);
 data1=data1[:,1:]
+print("Normalizing vectors, Please wait.......")
+for i in tqdm(range(0,np.shape(data1)[0])):
+	data1[i]=data1[i]/np.sqrt(np.sum(data1**2))
 pca=PCA(n_components=100);
 pca.fit(data1);
 data1=pca.transform(data1)
