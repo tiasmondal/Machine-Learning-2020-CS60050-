@@ -41,10 +41,12 @@ for i in tqdm(range(len(data1['Religious_texts']))):
 				print(data[i].dot(data[j]))
 				print(x*y)
 			dist=round(((data[i].dot(data[j]))/(x*y)),4);
-			distance[i][j]=math.acos(dist);
+			#distance[i][j]=math.acos(dist);
+			distance[i][j]=np.exp(-dist);
 		else:
 			print("red alert "+str(i)+" "+str(j))
-			distance[i][j]=math.acos(1);
+			#distance[i][j]=math.acos(1);
+			distance[i][j]=np.exp(-1);
 	
 
 print(distance)
