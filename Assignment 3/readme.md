@@ -4,7 +4,7 @@ NMI scores-
 3.Kmeans clustering without PCA- 0.296208546614843
 4.Kmeans clustering with PCA - 0.33869842039879217
 
-#For AGGLOMERATIVE CLUSTERING
+# For AGGLOMERATIVE CLUSTERING
 
 Steps to be followed-
 cd Agglomerative clustering
@@ -34,7 +34,7 @@ and used for furthur steps.This will take lower time as the dimensions are reduc
 5.For NMI score run "NMI_score.py"
 
 
-#For K-MEANS CLUSTERING
+# For K-MEANS CLUSTERING
 
 Steps to be followed-
 cd Kmeans clustering
