@@ -86,8 +86,8 @@ while(1):
 
 
 
-# centroid = np.load("Initial_centroids_Kmeans++.dat", allow_pickle=True)   #Initial Centroid choosing using Kmeans++ algo
-# centroid_new=centroid
+#centroid = np.load("Initial_centroids_Kmeans++.dat", allow_pickle=True)   #Initial Centroid choosing using Kmeans++ algo
+#centroid_new=centroid
 print("Selection of centroids successfully completed.....");
 np.array(clusters).dump("clusters_k_means.dat");
 for i in range(len(clusters)):

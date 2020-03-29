@@ -19,6 +19,7 @@ data=data[:,2:]
 # kmeans.predict([[0, 0], [12, 3]])
 # kmeans.cluster_centers_
 clustering = KMeans(n_clusters=8, random_state=0, init='k-means++',max_iter=300).fit(data);
+print(clustering.cluster_centers_)
 print(np.sort([i for i, x in enumerate(clustering.labels_) if x == 0]))
 print([i for i, x in enumerate(clustering.labels_) if x == 1])
 print([i for i, x in enumerate(clustering.labels_) if x == 2])
@@ -29,4 +30,4 @@ print([i for i, x in enumerate(clustering.labels_) if x == 6])
 print([i for i, x in enumerate(clustering.labels_) if x == 7])
 
 #print(clustering.cluster_centers_)
-clustering.cluster_centers_.dump("Initial_centroids_Kmeans++.dat");
+clustering.cluster_centers_.dump("Initial_centroids_Kmeans++_pca.dat");
