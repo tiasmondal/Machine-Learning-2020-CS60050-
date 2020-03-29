@@ -51,6 +51,7 @@ def norm(A):
 
 it=0
 print("Randomly selecting 8 clusters, Please wait.....................")
+tm=0;
 while(1):
 	random_sample=random.sample(range(589), 8)
 	clusters=[[],[],[],[],[],[],[],[]]
@@ -78,7 +79,15 @@ while(1):
 
 	if(count1==8):
 		break;
-	print(count1)
+	#print(count1)
+	tm=tm+1;
+	if(tm>3):    #if random initialization fails(As a backup)
+		print("Choosing Centroids........")
+		centroid = np.load("Initial_centroids_Kmeans++.dat", allow_pickle=True)   #Initial Centroid choosing using Kmeans++ algo
+		centroid_new=centroid                                                     #if random initialization fails
+		break;
+
+
 
 #print(clusters)
 
@@ -92,6 +101,7 @@ print("Selection of centroids successfully completed.....");
 np.array(clusters).dump("clusters_k_means.dat");
 for i in range(len(clusters)):
 	clusters[i]=np.sort(clusters[i])
+clusters.sort(key=lambda x:min(x))
 np.savetxt("clusters_k_means.txt",clusters,fmt="%s");
 
 while(it>=0):
@@ -144,6 +154,7 @@ while(it>=0):
 		np.array(clusters).dump("clusters_k_means.dat");
 		for i in range(len(clusters)):
 			clusters[i]=np.sort(clusters[i])
+		clusters.sort(key=lambda x:min(x))
 		np.savetxt("clusters_k_means.txt",clusters,fmt="%s");
 		print("Number of iterations "+str(it));
 		print("Reason 2")
@@ -163,6 +174,7 @@ while(it>=0):
 	np.array(clusters).dump("clusters_k_means.dat")
 	for i in range(len(clusters)):
 		clusters[i]=np.sort(clusters[i]);
+	clusters.sort(key=lambda x:min(x))
 	np.savetxt("clusters_k_means.txt",clusters,fmt="%s");
 
 

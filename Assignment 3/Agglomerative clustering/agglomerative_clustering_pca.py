@@ -55,6 +55,6 @@ print(clusters[7])
 
 for i in range(len(clusters)):
 	clusters[i]=np.sort(clusters[i]);
-
+clusters.sort(key=lambda x:min(x))
 np.savetxt("cluster_agglomerative_pca.txt",clusters,fmt="%s");
 np.array(clusters).dump("clusters_agglomerative_pca.dat");

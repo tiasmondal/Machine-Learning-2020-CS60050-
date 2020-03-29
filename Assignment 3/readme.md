@@ -1,8 +1,8 @@
 NMI scores-
 1.Agglomerative clustering without PCA- 0.022844902439705304
 2.Agglomerative clustering with PCA- 0.03743944772947285
-3.Kmeans clustering without PCA- 0.3621780814563305
-4.Kmeans clustering with PCA - 0.427705830367389
+3.Kmeans clustering without PCA- 0.3467612968987061
+4.Kmeans clustering with PCA - 0.40839309672633095
 
 # For AGGLOMERATIVE CLUSTERING
 
