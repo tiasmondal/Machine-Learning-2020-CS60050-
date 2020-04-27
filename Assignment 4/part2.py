@@ -1,5 +1,6 @@
 #Good
 import numpy as np
+import random
 import sys
 import csv
 import pandas as pd
@@ -7,7 +8,9 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib import style
-
+from decimal import *
+random.seed(1);
+getcontext().prec=30
 fig=plt.figure();
 ax1=fig.add_subplot(1,1,1)
 mean=np.zeros(7,);
@@ -51,7 +54,7 @@ def weight_initializer():
 	return w1,w2,w3;
 def softmax(arr):
 	#print(arr)
-	tot=np.sum(np.exp(arr));
+	tot=float(format(np.sum(np.exp(arr)),'.20f'))
 	# y=np.exp(arr)/(tot);
 	# for i in range(0,3):
 	# 	if(y[i]==1):
@@ -141,7 +144,7 @@ def train_batch(minibatch,minibatch_labels,w1,w2,w3,alpha,test_data,test_label,t
 				# 	if(out1[tm][0]==0 or out1[tm][0]==1):
 				# 		print(out1)
 				# 		exit();
-				error+=(np.sum(-one_hot_vec*np.log(out1)-(1-one_hot_vec)*np.log(1-out1+0.001)));
+				error+=(np.sum(-one_hot_vec*np.log(out1+0.001)-(1-one_hot_vec)*np.log(1-out1+0.001)));
 			#error+=np.sum((one_hot_vec-out)**2)
 				delta1,delta2,delta3=back_propag(w1,w2,w3,input1,wl,out,out1,one_hot_vec,0.001)
 			
@@ -162,7 +165,6 @@ def train_batch(minibatch,minibatch_labels,w1,w2,w3,alpha,test_data,test_label,t
 			w3=w3-alpha*cap_delta2/k;
 		print(error)
 		if(error>prev_error):
-				print("Missed it my friend")
 				#wx1,wx2,wx3=train_batch(minibatch,minibatch_labels,prevw1,prevw2,prevw3,alpha,test_data,test_label,train_data,train_label)
 				#return wx1,wx2,wx3
 				break;
