@@ -40,7 +40,7 @@ for i in range(0,210):
 	label_data1.append(x)
 X_train, X_test = feature_data[:192], feature_data[192:]
 y_train, y_test = label_data1[:192], label_data1[192:]
-mlp = MLPClassifier(hidden_layer_sizes=(32,64),activation='relu', max_iter=200, alpha=0,
+mlp = MLPClassifier(hidden_layer_sizes=(64,32),activation='relu', max_iter=200, alpha=0,
                     solver='sgd', verbose=10, random_state=1,
                     learning_rate_init=.01)
 mlp.fit(X_train, y_train)

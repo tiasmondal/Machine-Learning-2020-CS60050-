@@ -189,6 +189,7 @@ train_acc=predict(train_data,train_label,w1,w2)
 test_acc=predict(test_data,test_label,w1,w2)
 print("Final Train acc:= "+str(train_acc)+" Final Test acc:= "+str(test_acc))
 exit();
+#Below code is just testing purpose
 print(forward_pass(w1,np.reshape(minibatch[0][0],(1,7)),'hidden'))
 wl=forward_pass(w1,np.reshape(minibatch[0][0],(1,7)),'hidden') # First forward pass
 out=forward_pass(w2,wl,'final')   # 2nd Forward pass
